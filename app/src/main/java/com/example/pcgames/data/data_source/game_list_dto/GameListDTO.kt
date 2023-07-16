@@ -1,5 +1,4 @@
 package com.example.pcgames.data.data_source.game_list_dto
-
 import com.example.pcgames.domain.model.GameList
 
 class GameListDTO : ArrayList<GameListItem>()
@@ -16,8 +15,8 @@ data class GameListItem(
     val short_description: String,
     val thumbnail: String,
     val title: String
-){
-    fun toGamesList() : GameList{
+) {
+    fun toGamesList(): GameList {
         return GameList(
             developer = developer,
             freetogame_profile_url = freetogame_profile_url,

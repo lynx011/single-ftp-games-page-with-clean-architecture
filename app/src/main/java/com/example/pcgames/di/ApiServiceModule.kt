@@ -22,21 +22,21 @@ object ApiServiceModule {
     @Provides
     @Singleton
     @Named("GameService")
-    fun provideHttpService() : OkHttpClient = OkHttpClient().newBuilder()
+    fun provideHttpService(): OkHttpClient = OkHttpClient().newBuilder()
         .addInterceptor { chain ->
             val request = chain.request()
             val newRequest = request.newBuilder()
                 .build()
             chain.proceed(newRequest)
         }
-        .connectTimeout(1,TimeUnit.MINUTES)
-        .readTimeout(1,TimeUnit.MINUTES)
-        .writeTimeout(1,TimeUnit.MINUTES)
+        .connectTimeout(1, TimeUnit.MINUTES)
+        .readTimeout(1, TimeUnit.MINUTES)
+        .writeTimeout(1, TimeUnit.MINUTES)
         .build()
 
     @Provides
     @Singleton
-    fun provideRetrofit(@Named("GameService")okHttpClient: OkHttpClient) : Retrofit =
+    fun provideRetrofit(@Named("GameService") okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
@@ -45,12 +45,12 @@ object ApiServiceModule {
 
     @Provides
     @Singleton
-    fun provideGameApiService(retrofit: Retrofit) : GameApiService =
+    fun provideGameApiService(retrofit: Retrofit): GameApiService =
         retrofit.create(GameApiService::class.java)
 
     @Provides
     @Singleton
-    fun provideGameRepository(apiService: GameApiService) : GameRepository{
+    fun provideGameRepository(apiService: GameApiService): GameRepository {
         return GameRepositoryImpl(apiService)
     }
 }

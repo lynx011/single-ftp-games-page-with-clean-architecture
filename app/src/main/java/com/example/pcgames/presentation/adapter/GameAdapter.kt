@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.pcgames.databinding.GameItemBinding
 import com.example.pcgames.domain.model.GameList
 
@@ -17,13 +16,13 @@ class GameAdapter : RecyclerView.Adapter<GameAdapter.GameViewHolder>() {
             binding.executePendingBindings()
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameAdapter.GameViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = GameItemBinding.inflate(inflater,parent,false)
         return GameViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: GameAdapter.GameViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val games = differ.currentList[position]
         games?.let(holder::bind)
     }
